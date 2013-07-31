@@ -162,10 +162,11 @@ class Tweetgater_Twitter
         
         $data = array();
         try {
-            $search = new Zend_Service_Twitter_Search();
-            $timeline = $search->search($terms, array('page' => $page, 'since_id' => 1520639490, 'rpp' => $resultsPerPage));                         
+            $search = new Zend_Service_Twitter();
+            $timeline = $search->searchTweets($terms, array('page' => $page, 'since_id' => 1520639490, 'rpp' => $resultsPerPage));                         
 
-            foreach ($timeline['results'] as $t) {
+			$results = $timeline->getValue();print_r($results);exit();
+            foreach ($results['results'] as $t) {
                 $data[] = array(
                     'id'                      => (string)$t['id'],
                     'user-profile_image_url'  => (string)$t['profile_image_url'],
