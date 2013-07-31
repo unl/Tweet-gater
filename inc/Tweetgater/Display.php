@@ -33,12 +33,14 @@ class Tweetgater_Display
         $ret = '';
         
         if ($error == '') {
+            /*
 			$ret .= '<div class="tweetHeader">'
 				 . '<h2>Tweets from UNL Community</h2>'
 				 . '<a href="#accounts">&rarr; <span>See all accounts</span></a>' 
 				 . '</div>'
                  .  '<div style="clear:both;"></div>'
 			;
+            */
             foreach ($timeline as $t) {
                 $ret .= '<div class="tweet">'
                      . '    <div class="avatar">'
@@ -47,22 +49,17 @@ class Tweetgater_Display
                      . '    </div>'
                      . '    <div class="text">'
                      . '        <a class="username" href="http://twitter.com/' . $t['user-screen_name'] . '"><strong>' . $t['user-name'] . '</strong></a> <br />' . $t['text']
+                     . '        <div class="origination"> ' . $t['elapsed_time'] . ' from ' . $t['source']
+                     .          (($t['in_reply_to_screen_name'] != '') ? ' <a class="user" href="http://www.twitter.com/' . $t['in_reply_to_screen_name'] . '/status/' . $t['in_reply_to_status_id'] . '">in reply to ' . $t['in_reply_to_screen_name'] . '</a>' : '')
                      . '    </div>'
-                     . '    <div class="origination"> ' . $t['elapsed_time'] . ' from ' . $t['source']
-                     . (($t['in_reply_to_screen_name'] != '') ? ' <a class="user" href="http://www.twitter.com/' . $t['in_reply_to_screen_name'] . '/status/' . $t['in_reply_to_status_id'] . '">in reply to ' . $t['in_reply_to_screen_name'] . '</a>' : '')
                      . '    </div>'
                      . '</div>'
-					 . '<div class="wrap-l"></div>'
-					 . '<div class="wrap-r"></div>'
-					 
-					 //Clear space for next tweet
-					 . '<div style="margin-bottom:-50px;"></div>'
                      ;
             }
-            
+            /*
             $ret .= '<br />'
                  . '<a class="moreButton" href="index.php?page=' . ($page + 1) . '">More...</a>'
-                 ;
+                 ;*/
         } else {
             $ret = $error;
         }
